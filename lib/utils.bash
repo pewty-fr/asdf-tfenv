@@ -61,6 +61,8 @@ install_version() {
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
+		ln -s "$install_path/bin/tfenv" "$install_path/tfenv"
+
 		# TODO: Assert tfenv executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
