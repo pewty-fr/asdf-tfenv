@@ -52,3 +52,4 @@ Contributions of any kind welcome! See the [contributing guide](contributing.md)
 # License
 
 See [LICENSE](LICENSE) © [Tanguy Falconnet](https://github.com/pewty-fr/)
+
