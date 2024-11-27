@@ -5,7 +5,8 @@ set -euo pipefail
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for tfenv.
 GH_REPO="https://github.com/tfutils/tfenv"
 TOOL_NAME="tfenv"
-TOOL_TEST="tfenv --help"
+TOOL_TEST1="tfenv --help"
+TOOL_TEST2="terraform --help"
 
 fail() {
 	echo -e "asdf-$TOOL_NAME: $*"
@@ -62,10 +63,13 @@ install_version() {
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
 		ln -s "$install_path/bin/tfenv" "$install_path/tfenv"
+		ln -s "$install_path/bin/terraform" "$install_path/terraform"
 
 		# TODO: Assert tfenv executable exists.
 		local tool_cmd
-		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+		tool_cmd="$(echo "$TOOL_TEST1" | cut -d' ' -f1)"
+		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
+		tool_cmd="$(echo "$TOOL_TEST2" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
 
 		echo "$TOOL_NAME $version installation was successful!"
